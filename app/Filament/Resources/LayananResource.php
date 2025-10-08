@@ -28,6 +28,11 @@ class LayananResource extends Resource
                     ->required()
                     ->maxLength(100)
                     ->unique(ignoreRecord: true),
+                Forms\Components\TextInput::make('kode_layanan')
+                    ->label('Kode Layanan')
+                    ->required()
+                    ->maxLength(100)
+                    ->unique(ignoreRecord: true),
             ]);
     }
 
@@ -37,6 +42,10 @@ class LayananResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('layanan')
                     ->label('Layanan')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('kode_layanan')
+                    ->label('Kode Layanan')
                     ->sortable()
                     ->searchable(),
             ])
@@ -56,8 +65,8 @@ class LayananResource extends Resource
     {
         return [
             'index' => Pages\ListLayanans::route('/'),
-            'create' => Pages\CreateLayanan::route('/create'),
-            'edit' => Pages\EditLayanan::route('/{record}/edit'),
+            // 'create' => Pages\CreateLayanan::route('/create'),
+            // 'edit' => Pages\EditLayanan::route('/{record}/edit'),
         ];
     }
 }

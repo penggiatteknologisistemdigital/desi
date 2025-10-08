@@ -16,6 +16,7 @@ class Layanan extends Model
 
     protected $fillable = [
         'layanan',
+        'kode_layanan',
     ];
 
     protected static function booted()
