@@ -6,8 +6,8 @@
     <!-- Foto di kiri -->
     <div style="flex:0 0 40%; text-align:center;">
         <img src="{{ $url }}"
-             alt="Foto Baliho"
-             style="max-width:100%; height:auto; border-radius:8px;">
+            alt="Foto Baliho"
+            style="max-width:100%; height:auto; border-radius:8px;">
     </div>
 
     <!-- Caption di kanan -->
