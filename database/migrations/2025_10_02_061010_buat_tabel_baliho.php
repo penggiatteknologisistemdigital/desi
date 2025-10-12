@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('nama_baliho');
             $table->string('lokasi_baliho');
-            $table->string('koordinat_baliho');
+            $table->string('koordinat_baliho')->nullable();
             $table->string('foto_baliho');
             $table->string('ukuran_baliho');
             $table->string('layout_baliho');

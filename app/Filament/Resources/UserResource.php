@@ -30,13 +30,13 @@ class UserResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
+            ->schema([ 
+                TextInput::make('name')
                     ->label('Nama Lengkap')
                     ->required()
                     ->maxLength(255),
 
-                Forms\Components\TextInput::make('telepon')
+                TextInput::make('telepon')
                     ->label('Nomor Telepon')
                     ->required()
                     ->maxLength(20)
@@ -44,7 +44,7 @@ class UserResource extends Resource
                     ->placeholder('08xxxxxxxxxx')
                     ->rules(['regex:/^[0-9]+$/']), // hanya angka
 
-                Forms\Components\TextInput::make('email')
+                TextInput::make('email')
                     ->email()
                     ->required()
                     ->maxLength(255),
@@ -144,16 +144,16 @@ class UserResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make()
-                    ->label('Hapus'),
-            ])
+            // ->actions([
+            //     Tables\Actions\EditAction::make(),
+            //     Tables\Actions\DeleteAction::make()
+            //         ->label('Hapus'),
+            // ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                ->visible(fn ($record) => auth()->user()?->hasRole('Raja') || auth()->id() === $record->id),
+                ->visible(fn ($record) => auth()->user()?->hasRole('') || auth()->id() === $record->id),
                 Tables\Actions\DeleteAction::make()
-                ->visible(fn () => auth()->user()?->hasRole('Raja')),
+                ->visible(fn () => auth()->user()?->hasRole('')),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -186,9 +186,9 @@ class UserResource extends Resource
         return 'id';
     }
 
-    public static function canViewAny(): bool
-    {
-        return auth()->user()?->hasRole('Raja');
-    }
+    // public static function canViewAny(): bool
+    // {
+        // return auth()->user()?->hasRole('Raja');
+    // }
 
 }

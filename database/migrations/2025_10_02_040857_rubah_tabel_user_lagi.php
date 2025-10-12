@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             // tambah kolom instansi_id dan role_id
             $table->char('instansi_id', 36)->nullable()->after('id');
-            $table->char('role_id', 36)->nullable()->after('instansi_id');
+            // $table->char('role_id', 36)->nullable()->after('instansi_id');
 
             // buat foreign key ke tbl_instansi dan tbl_role
             $table->foreign('instansi_id')
@@ -22,10 +22,10 @@ return new class extends Migration
                     ->on('tbl_instansi')
                     ->onDelete('set null');
 
-            $table->foreign('role_id')
-                    ->references('id')
-                    ->on('tbl_role')
-                    ->onDelete('set null');
+            // $table->foreign('role_id')
+            //         ->references('id')
+            //         ->on('tbl_role')
+            //         ->onDelete('set null');
         });
     }
 
