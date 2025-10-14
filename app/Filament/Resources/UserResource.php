@@ -30,7 +30,7 @@ class UserResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([ 
+            ->schema([
                 TextInput::make('name')
                     ->label('Nama Lengkap')
                     ->required()
@@ -118,6 +118,26 @@ class UserResource extends Resource
                     ->disableCreateAnother(),
                 ])
             ->columns([
+                \Filament\Tables\Columns\ImageColumn::make('foto_profil')
+                    ->label('Foto')
+                    ->disk('public')
+                    ->height(48)
+                    ->width(48)
+                    ->square()
+                    ->action(
+                        Tables\Actions\Action::make('preview')
+                            ->label('Lihat Foto')
+                            ->icon('heroicon-o-eye')
+                            ->modalHeading('Foto Profil')
+                            ->modalButton('Tutup')
+                            ->modalContent(function ($record) {
+                                $foto = $record->foto_profil
+                                ? asset('storage/' . $record->foto_profil)
+                                : asset('images/default-avatar.png');
+                                return view('components.foto-preview', ['foto' => $foto]);
+                            })
+                        ),
+
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama')
                     ->searchable()
