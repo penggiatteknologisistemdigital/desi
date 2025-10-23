@@ -2,22 +2,24 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-
-class PesanBaliho extends Model
+class PesanTitikBaliho extends Model
 {
     use HasFactory, HasUuids;
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+    protected $keyType = 'string';
 
-    protected $table = 'tbl_pesan_baliho';
+    protected $table = 'pesan_titik_baliho';
 
     protected $fillable = [
         'baliho_id',
         'user_id',
         'instansi_id',
-        'role_id',  //ini diambil dari tabel user?
         'kode_trans',
         'tanggal_mulai',
         'tanggal_selesai',
@@ -32,6 +34,31 @@ class PesanBaliho extends Model
         'tlp_pic',
         'status_pakai',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if (empty($model->id)) {
+                $model->id = (string) Str::uuid();
+            }
+
+            if (empty($model->kode_trans)) {
+                $model->kode_trans = self::generateKodeTrans();
+            }
+        });
+    }
+
+    private static function generateKodeTrans()
+    {
+        // Format: BHL + YYYYMMDD + 4 random huruf/angka
+        $prefix = 'BHL';
+        $date = now()->format('Ymd');
+        $random = strtoupper(Str::random(4));
+
+        return "{$prefix}{$date}{$random}";
+    }
 
     // Relasi dengan tabel Baliho
     public function baliho()
@@ -56,5 +83,4 @@ class PesanBaliho extends Model
     {
         return $this->hasMany(DetailTransPesan::class, 'kode_trans_fk', 'kode_trans');
     }
-
 }

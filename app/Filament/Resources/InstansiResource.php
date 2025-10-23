@@ -56,7 +56,7 @@ class InstansiResource extends Resource
                     ->modalWidth('lg')
                     ->modal()
                     ->successNotificationTitle('Instansi berhasil diperbarui')
-                     ->modalSubmitActionLabel('Simpan Perubahan') // ubah dari "Save changes"
+                    ->modalSubmitActionLabel('Simpan Perubahan')
                     ->modalCancelActionLabel('Batal')
                     ->after(function ($record, $data, $action) {
                         $action->getLivewire()->dispatch('$refresh');

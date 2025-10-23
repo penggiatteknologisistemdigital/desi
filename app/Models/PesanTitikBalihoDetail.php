@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class DetailTransPesan extends Model
+class PesanTitikBalihoDetail extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $table = 'tbl_detail_trans_pesan';
+    protected $table = 'pesan_titik_baliho_detail';
 
     protected $fillable = [
         'kode_trans_fk',
@@ -18,10 +18,8 @@ class DetailTransPesan extends Model
         'baliho_id',
     ];
 
-    // Relasi dengan tbl_pesan
     public function pesan()
     {
-        return $this->belongsTo(PesanBaliho::class, 'kode_trans_fk', 'kode_trans');
+        return $this->belongsTo(PesanTitikBaliho::class, 'kode_trans_fk', 'kode_trans');
     }
-
 }
