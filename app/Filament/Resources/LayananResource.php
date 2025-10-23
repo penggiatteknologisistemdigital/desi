@@ -61,9 +61,6 @@ class LayananResource extends Resource
                         ->sortable()
                         ->extraAttributes(['class' => 'whitespace-normal break-words max-w-xs']),
             ])
-            ->filters([
-                //
-            ])
             ->actions([
                 Tables\Actions\EditAction::make()
                     ->label('Edit')
